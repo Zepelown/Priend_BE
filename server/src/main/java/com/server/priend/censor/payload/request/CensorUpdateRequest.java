@@ -1,4 +1,4 @@
-package com.server.priend.censor.payload.response;
+package com.server.priend.censor.payload.request;
 
 import lombok.Data;
 

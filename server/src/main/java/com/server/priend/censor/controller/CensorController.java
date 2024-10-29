@@ -2,7 +2,7 @@ package com.server.priend.censor.controller;
 
 import com.server.priend.censor.payload.request.CensorDataRequest;
 import com.server.priend.censor.payload.response.CensorDataResponse;
-import com.server.priend.censor.payload.response.CensorUpdateRequest;
+import com.server.priend.censor.payload.request.CensorUpdateRequest;
 import com.server.priend.censor.service.CensorService;
 import com.server.priend.common.payload.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
