@@ -1,7 +1,8 @@
 package com.server.priend.censor.controller;
 
-import com.server.priend.censor.payload.dto.CensorData;
 import com.server.priend.censor.payload.request.CensorDataRequest;
+import com.server.priend.censor.payload.response.CensorDataResponse;
+import com.server.priend.censor.payload.response.CensorUpdateRequest;
 import com.server.priend.censor.service.CensorService;
 import com.server.priend.common.payload.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,22 @@ public class CensorController {
 
     @PostMapping("data")
     public ResponseEntity<Response> getCensorData(@RequestBody CensorDataRequest censorDataRequest) {
-        CensorData censorData = censorService.requestPotData(censorDataRequest.getPotId());
+        CensorDataResponse censorData = censorService.requestPotData(censorDataRequest.getPotId());
         Response response = Response.builder()
                 .message("수신 성공")
                 .data(censorData)
+                .build();
+        return new ResponseEntity<Response>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("update")
+    public ResponseEntity<Response> updateCensorData(@RequestBody CensorUpdateRequest censorUpdateRequest) {
+        censorService.updatePotData(censorUpdateRequest.getPostId(),
+                censorUpdateRequest.getPlantSoilMoisture(),
+                censorUpdateRequest.getPlantTemperature()
+        );
+        Response response = Response.builder()
+                .message("수신 성공")
                 .build();
         return new ResponseEntity<Response>(response, HttpStatus.OK);
     }
