@@ -35,7 +35,7 @@ public class CensorController {
 
     @PostMapping("update")
     public ResponseEntity<Response> updateCensorData(@RequestBody CensorUpdateRequest censorUpdateRequest) {
-        censorService.updatePotData(censorUpdateRequest.getPostId(),
+        censorService.updatePotData(censorUpdateRequest.getPotId(),
                 censorUpdateRequest.getPlantSoilMoisture(),
                 censorUpdateRequest.getPlantTemperature()
         );

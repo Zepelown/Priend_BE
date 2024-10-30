@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 @Data
 public class CensorUpdateRequest {
-    private Long postId;
+    private Long potId;
     private BigDecimal plantSoilMoisture;
     private BigDecimal plantTemperature;
 }
