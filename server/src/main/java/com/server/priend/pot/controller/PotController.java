@@ -1,9 +1,9 @@
-package com.server.priend.censor.controller;
+package com.server.priend.pot.controller;
 
-import com.server.priend.censor.payload.request.CensorDataRequest;
-import com.server.priend.censor.payload.response.CensorDataResponse;
-import com.server.priend.censor.payload.request.CensorUpdateRequest;
-import com.server.priend.censor.service.CensorService;
+import com.server.priend.pot.payload.request.PotDataRequest;
+import com.server.priend.pot.payload.response.PotDataResponse;
+import com.server.priend.pot.payload.request.PotUpdateRequest;
+import com.server.priend.pot.service.PotService;
 import com.server.priend.common.payload.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,17 +15,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/plant/censor/")
-public class CensorController {
-    private final CensorService censorService;
+public class PotController {
+    private final PotService potService;
 
     @Autowired
-    public CensorController(CensorService censorService) {
-        this.censorService = censorService;
+    public PotController(PotService potService) {
+        this.potService = potService;
     }
 
     @PostMapping("data")
-    public ResponseEntity<Response> getCensorData(@RequestBody CensorDataRequest censorDataRequest) {
-        CensorDataResponse censorData = censorService.requestPotData(censorDataRequest.getPotId());
+    public ResponseEntity<Response> getCensorData(@RequestBody PotDataRequest potDataRequest) {
+        PotDataResponse censorData = potService.requestPotData(potDataRequest.getPotId());
         Response response = Response.builder()
                 .message("수신 성공")
                 .data(censorData)
@@ -34,10 +34,10 @@ public class CensorController {
     }
 
     @PostMapping("update")
-    public ResponseEntity<Response> updateCensorData(@RequestBody CensorUpdateRequest censorUpdateRequest) {
-        censorService.updatePotData(censorUpdateRequest.getPotId(),
-                censorUpdateRequest.getPlantSoilMoisture(),
-                censorUpdateRequest.getPlantTemperature()
+    public ResponseEntity<Response> updateCensorData(@RequestBody PotUpdateRequest potUpdateRequest) {
+        potService.updatePotData(potUpdateRequest.getPotId(),
+                potUpdateRequest.getPlantSoilMoisture(),
+                potUpdateRequest.getPlantTemperature()
         );
         Response response = Response.builder()
                 .message("수신 성공")

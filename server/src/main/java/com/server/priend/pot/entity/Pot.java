@@ -1,4 +1,4 @@
-package com.server.priend.censor.entity;
+package com.server.priend.pot.entity;
 
 import com.server.priend.auth.entity.User;
 import jakarta.persistence.*;

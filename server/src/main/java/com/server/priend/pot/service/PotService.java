@@ -1,9 +1,9 @@
-package com.server.priend.censor.service;
+package com.server.priend.pot.service;
 
-import com.server.priend.censor.entity.Pot;
-import com.server.priend.censor.payload.dto.CensorData;
-import com.server.priend.censor.payload.response.CensorDataResponse;
-import com.server.priend.censor.repository.PotRepository;
+import com.server.priend.pot.entity.Pot;
+import com.server.priend.pot.payload.dto.PotData;
+import com.server.priend.pot.payload.response.PotDataResponse;
+import com.server.priend.pot.repository.PotRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,18 +12,18 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 @Service
-public class CensorService {
+public class PotService {
     private final PotRepository potRepository;
 
     @Autowired
-    public CensorService(PotRepository potRepository) {
+    public PotService(PotRepository potRepository) {
         this.potRepository = potRepository;
     }
 
-    public CensorDataResponse requestPotData(Long potId) {
-        CensorData censorData = potRepository.findCensorDataById(potId)
+    public PotDataResponse requestPotData(Long potId) {
+        PotData potData = potRepository.findCensorDataById(potId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid potId"));
-        return new CensorDataResponse(censorData);
+        return new PotDataResponse(potData);
     }
 
     public void updatePotData(Long postId, BigDecimal soilMoisture, BigDecimal temperature) {
