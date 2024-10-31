@@ -5,6 +5,8 @@ import com.server.priend.pot.payload.response.PotDataResponse;
 import com.server.priend.pot.payload.request.PotUpdateRequest;
 import com.server.priend.pot.service.PotService;
 import com.server.priend.common.payload.response.Response;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/plant/censor/")
 public class PotController {
     private final PotService potService;
+    private static final Logger logger = LoggerFactory.getLogger(PotController.class);
 
     @Autowired
     public PotController(PotService potService) {
@@ -26,10 +29,8 @@ public class PotController {
     @PostMapping("data")
     public ResponseEntity<Response> getCensorData(@RequestBody PotDataRequest potDataRequest) {
         PotDataResponse censorData = potService.requestPotData(potDataRequest.getPotId());
-        Response response = Response.builder()
-                .message("수신 성공")
-                .data(censorData)
-                .build();
+        logger.info(censorData.getPotData().getPlantName());
+        Response response = Response.ok("수신성공", censorData);
         return new ResponseEntity<Response>(response, HttpStatus.OK);
     }
 
