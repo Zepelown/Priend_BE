@@ -17,9 +17,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 public class Pot {
-    @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "user_id")
-    User user;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "pot_id")
