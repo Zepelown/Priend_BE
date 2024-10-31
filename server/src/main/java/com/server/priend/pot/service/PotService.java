@@ -21,9 +21,9 @@ public class PotService {
     }
 
     public PotDataResponse requestPotData(Long potId) {
-        PotData potData = potRepository.findCensorDataById(potId)
+        Pot pot = potRepository.findById(potId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid potId"));
-        return new PotDataResponse(potData);
+        return new PotDataResponse(PotData.of(pot));
     }
 
     public void updatePotData(Long postId, BigDecimal soilMoisture, BigDecimal temperature) {
@@ -33,9 +33,8 @@ public class PotService {
             Pot pot = potOptional.get();
             pot.setPlantSoilMoisture(soilMoisture);
             pot.setPlantTemperature(temperature);
-            potRepository.save(pot); // 변경된 엔티티를 저장
+            potRepository.save(pot);
         } else {
-            // 예외 처리: 해당 postId로 Pot을 찾을 수 없음
             throw new EntityNotFoundException("Pot not found with id: " + postId);
         }
     }
