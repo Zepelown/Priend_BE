@@ -32,4 +32,8 @@ public class Pot {
     private BigDecimal plantSoilMoisture;
     @Column(precision = 6, scale = 3)
     private BigDecimal plantTemperature;
+    @Column(precision = 6, scale = 3)
+    private BigDecimal plantHumidity;
+    @Column(precision = 6, scale = 3)
+    private BigDecimal plantIlluminance;
 }
