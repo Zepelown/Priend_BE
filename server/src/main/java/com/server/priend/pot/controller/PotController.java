@@ -1,10 +1,10 @@
 package com.server.priend.pot.controller;
 
-import com.server.priend.pot.payload.request.PotDataRequest;
-import com.server.priend.pot.payload.response.PotDataResponse;
-import com.server.priend.pot.payload.request.PotUpdateRequest;
-import com.server.priend.pot.service.PotService;
 import com.server.priend.common.payload.response.Response;
+import com.server.priend.pot.payload.request.PotDataRequest;
+import com.server.priend.pot.payload.request.PotUpdateRequest;
+import com.server.priend.pot.payload.response.PotDataResponse;
+import com.server.priend.pot.service.PotService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/plant/censor/")
 public class PotController {
-    private final PotService potService;
     private static final Logger logger = LoggerFactory.getLogger(PotController.class);
+    private final PotService potService;
 
     @Autowired
     public PotController(PotService potService) {
@@ -36,10 +36,7 @@ public class PotController {
 
     @PostMapping("update")
     public ResponseEntity<Response> updateCensorData(@RequestBody PotUpdateRequest potUpdateRequest) {
-        potService.updatePotData(potUpdateRequest.getPotId(),
-                potUpdateRequest.getPlantSoilMoisture(),
-                potUpdateRequest.getPlantTemperature()
-        );
+        potService.updatePotData(potUpdateRequest);
         Response response = Response.builder()
                 .message("수신 성공")
                 .build();

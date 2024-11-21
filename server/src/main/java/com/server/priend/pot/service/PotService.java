@@ -2,6 +2,8 @@ package com.server.priend.pot.service;
 
 import com.server.priend.pot.entity.Pot;
 import com.server.priend.pot.payload.dto.PotData;
+import com.server.priend.pot.payload.request.PotDataRequest;
+import com.server.priend.pot.payload.request.PotUpdateRequest;
 import com.server.priend.pot.payload.response.PotDataResponse;
 import com.server.priend.pot.repository.PotRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -30,16 +32,18 @@ public class PotService {
         return new PotDataResponse(PotData.of(pot));
     }
 
-    public void updatePotData(Long postId, BigDecimal soilMoisture, BigDecimal temperature) {
-        Optional<Pot> potOptional = potRepository.findById(postId);
+    public void updatePotData(PotUpdateRequest potUpdateRequest) {
+        Optional<Pot> potOptional = potRepository.findById(potUpdateRequest.getPotId());
 
         if (potOptional.isPresent()) {
             Pot pot = potOptional.get();
-            pot.setPlantSoilMoisture(soilMoisture);
-            pot.setPlantTemperature(temperature);
+            pot.setPlantSoilMoisture(potUpdateRequest.getPlantSoilMoisture());
+            pot.setPlantTemperature(potUpdateRequest.getPlantTemperature());
+            pot.setPlantHumidity(potUpdateRequest.getPlantHumidity());
+            pot.setPlantIlluminance(potUpdateRequest.getPlantIlluminance());
             potRepository.save(pot);
         } else {
-            throw new EntityNotFoundException("Pot not found with id: " + postId);
+            throw new EntityNotFoundException("Pot not found with id: " + potUpdateRequest.getPotId());
         }
     }
 }
