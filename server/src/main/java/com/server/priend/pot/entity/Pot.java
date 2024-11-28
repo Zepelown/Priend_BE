@@ -28,12 +28,12 @@ public class Pot {
     @NotNull
     private LocalDate plantStartDate;
     private Short plantAge;
-    @Column(precision = 6, scale = 3)
+    @Column(precision = 6, scale = 1)
     private BigDecimal plantSoilMoisture;
-    @Column(precision = 6, scale = 3)
+    @Column(precision = 6, scale = 1)
     private BigDecimal plantTemperature;
-    @Column(precision = 6, scale = 3)
+    @Column(precision = 6, scale = 1)
     private BigDecimal plantHumidity;
-    @Column(precision = 6, scale = 3)
+    @Column(precision = 6, scale = 1)
     private BigDecimal plantIlluminance;
 }
